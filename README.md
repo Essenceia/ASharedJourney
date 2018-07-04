@@ -1,5 +1,9 @@
 ﻿# ASharedJourney
-This is a fork of a project originally developed during the SFR game jam alongside Pierre, Gabriel, Aurore & Fabio.
+
+This is a fork of a project originally developed during the SFR game jam along side Pierre, Gabriel, Aurore & Fabio.
+
+This project used the go [pixel](https://github.com/faiface/pixel) package for sound management and sprites, go check them out.
+
 ```
 GameJam SFR 2018 Julia - Pierre - Gabriel - Aurore - Fabio
 
@@ -9,13 +13,9 @@ Theme: Si j'étais toi et que tu étais moi (If I were you and you were me)
 
 [Itch.io](https://fmaschi.itch.io/a-shared-journey)
 ```
-The goal of this fork is to port the game to mobile and experiment with the 
 ## Getting Started
 
 * [GO](https://golang.org) - Programming language
-* [Visual Code](https://code.visualstudio.com) - Light and useful IDE (Linux, MacOS, Win)
-* [GOLand] (https://www.jetbrains.com/go/) - An alternative IDE
-
 
 ## Building and running
 
@@ -45,6 +45,10 @@ make run
 
 ```
 make build_mac
+```
+#### OR 
+```
+make build_linux
 ```
 
 ## License
