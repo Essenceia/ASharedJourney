@@ -2,17 +2,17 @@
 
 This is a fork of a project originally developed during the SFR game jam along side Pierre, Gabriel, Aurore & Fabio.
 
-This project used the go [pixel](https://github.com/faiface/pixel) package for sound management and sprites, go check them out.
+This project uses the go [pixel](https://github.com/faiface/pixel) package for sound management and sprites, go check them out.
 
-```
-GameJam SFR 2018 Julia - Pierre - Gabriel - Aurore - Fabio
 
-Music: Thibault
+>GameJam SFR 2018 Julia - Pierre - Gabriel - Aurore - Fabio
+>
+>Music: Thibault
+>
+>Theme: Si j'étais toi et que tu étais moi (If I were you and you were me)
+>
+>[Itch.io](https://fmaschi.itch.io/a-shared-journey)
 
-Theme: Si j'étais toi et que tu étais moi (If I were you and you were me)
-
-[Itch.io](https://fmaschi.itch.io/a-shared-journey)
-```
 ## Getting Started
 
 * [GO](https://golang.org) - Programming language
