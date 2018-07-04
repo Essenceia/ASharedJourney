@@ -23,21 +23,21 @@ type GameSupervisor struct {
 
 var Sup *GameSupervisor
 
-//Start inits the game and specify the game mode
+//Start initialises the game and specify the game mode
 func Start() chan *GameEvent {
 	Sup = new(GameSupervisor)
 	Sup.GameEventsChannel = make(chan *GameEvent, 1)
 	return Sup.GameEventsChannel
 }
 
-//Play launches game supervisor (should be lauched last)
+//Play launches game supervisor (should be launched last)
 
 func (gameSupervisor *GameSupervisor) Play() {
 	var nextMove *PlayerDirections
 	var nextEvent *Event
 	nextGameEvent := new(GameEvent)
 	for play := true; play; play = shared.Continue() {
-		time.Sleep(shared.KeyPressedDelay_ms * time.Millisecond)
+		time.Sleep(shared.KeyPressedDelayMs * time.Millisecond)
 
 		nextEvent = catchEvent()
 		//get the players key move

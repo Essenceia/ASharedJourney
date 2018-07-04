@@ -1,11 +1,15 @@
 ﻿# ASharedJourney
+This is a fork of a project originally developed during the SFR game jam alongside Pierre, Gabriel, Aurore & Fabio.
+```
 GameJam SFR 2018 Julia - Pierre - Gabriel - Aurore - Fabio
+
 Music: Thibault
 
 Theme: Si j'étais toi et que tu étais moi (If I were you and you were me)
 
 [Itch.io](https://fmaschi.itch.io/a-shared-journey)
-
+```
+The goal of this fork is to port the game to mobile and experiment with the 
 ## Getting Started
 
 * [GO](https://golang.org) - Programming language

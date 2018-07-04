@@ -18,12 +18,12 @@ import (
 type Mechanics struct {
 	world tiles.World
 	//communication channel to animator
-	toAnime chan *tiles.World
+	toAnimate chan *tiles.World
 	//communication channel from supervisor
 	gameEventChannel chan *supervisor.GameEvent
 }
 
-//game mechanincs stringleton
+//game mechanics
 var Mecha *Mechanics
 
 //initialise the game mechanics structure
@@ -36,18 +36,18 @@ func Start(
 	var toAnim chan *tiles.World
 	toAnim = make(chan *tiles.World, 1)
 
-	Mecha.toAnime = toAnim
+	Mecha.toAnimate = toAnim
 	Mecha.gameEventChannel = gameEventChannel
 	Mecha.world = baseWorld
 
 	//log.Print("Mecanics loaded")
-	return Mecha.toAnime
+	return Mecha.toAnimate
 }
 
 //synchronisation objects
-func (mechanics *Mechanics) muxChannel() *supervisor.GameEvent {
+func (m *Mechanics) muxChannel() *supervisor.GameEvent {
 	select {
-	case nextGameEvent, ok := <-mechanics.gameEventChannel:
+	case nextGameEvent, ok := <-m.gameEventChannel:
 		if !ok {
 			fmt.Println("Channel  closed!")
 			log.Fatal()
@@ -69,64 +69,64 @@ func (mechanics *Mechanics) muxChannel() *supervisor.GameEvent {
 }
 
 //call mechanics
-func (mechanics *Mechanics) Play() {
+func (m *Mechanics) Play() {
 
 	for play := true; play; play = shared.Continue() {
 		//delay to not call and overload cpu
-		time.Sleep(shared.MechanicsRefreshDelay_ms * time.Millisecond)
+		time.Sleep(shared.MechanicsRefreshDelayMs * time.Millisecond)
 
-		gameEvent := mechanics.muxChannel()
-		mechanics.toAnime <- mechanics.Move(gameEvent.PlayerDirections)
-		mechanics.handleGameEvent(gameEvent.Event)
+		gameEvent := m.muxChannel()
+		m.toAnimate <- m.Move(gameEvent.PlayerDirections)
+		m.handleGameEvent(gameEvent.Event)
 	}
 }
 
-func (mechanics *Mechanics) handleGameEvent(event *supervisor.Event) {
+func (m *Mechanics) handleGameEvent(event *supervisor.Event) {
 	switch *event {
 	case "RESTART":
-		mechanics.world = tiles.RestartLevel()
+		m.world = tiles.RestartLevel()
 		menu.Menu(menu.WinLevelMenuImage, "Reloading level ...", pixel.V(180, 150), true, music.SOUND_EFFECT_START_GAME)
 		shared.Win.Clear(color.Black)
 		break
 	case "KEY0":
 		tiles.SetNexLevel(0)
-		mechanics.world = tiles.NextLevel()
+		m.world = tiles.NextLevel()
 		break
 	case "KEY1":
 		tiles.SetNexLevel(1)
-		mechanics.world = tiles.NextLevel()
+		m.world = tiles.NextLevel()
 		break
 	case "KEY2":
 		tiles.SetNexLevel(2)
-		mechanics.world = tiles.NextLevel()
+		m.world = tiles.NextLevel()
 		break
 	case "KEY3":
 		tiles.SetNexLevel(3)
-		mechanics.world = tiles.NextLevel()
+		m.world = tiles.NextLevel()
 		break
 	case "KEY4":
 		tiles.SetNexLevel(4)
-		mechanics.world = tiles.NextLevel()
+		m.world = tiles.NextLevel()
 		break
 	case "KEY5":
 		tiles.SetNexLevel(5)
-		mechanics.world = tiles.NextLevel()
+		m.world = tiles.NextLevel()
 		break
 	case "KEY6":
 		tiles.SetNexLevel(6)
-		mechanics.world = tiles.NextLevel()
+		m.world = tiles.NextLevel()
 		break
 	case "KEY7":
 		tiles.SetNexLevel(7)
-		mechanics.world = tiles.NextLevel()
+		m.world = tiles.NextLevel()
 		break
 	case "KEY8":
 		tiles.SetNexLevel(8)
-		mechanics.world = tiles.NextLevel()
+		m.world = tiles.NextLevel()
 		break
 	case "KEY9":
 		tiles.SetNexLevel(9)
-		mechanics.world = tiles.NextLevel()
+		m.world = tiles.NextLevel()
 		break
 
 	default:

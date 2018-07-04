@@ -22,17 +22,17 @@ type nopCloser struct {
 func (nopCloser) Close() error { return nil }
 
 //global synchronization channel
-var MusicLoaded chan int
+var GameMusicLoader chan int
 
 func init() {
-	MusicLoaded = make(chan int, 0)
+	GameMusicLoader = make(chan int, 0)
 }
 
-const musicMTfileName string = "MainThemeMiroir.mp3"
+const musicThemeFileName = "MainThemeMiroir.mp3"
 
 type musicStreamers struct {
 	//list of loaded musics ( streamer )
-	mainTheamStreamer beep.Streamer
+	mainThemeStreamer beep.Streamer
 	backgroundMusic   *beep.Buffer
 	gameEffects       map[SoundEffect]*beep.Buffer
 	streamControl     beep.Ctrl
@@ -45,13 +45,13 @@ func (m *musicStreamers) Start() {
 	var format beep.Format
 
 	go func() {
-		format = m.loadMainTheam()
+		format = m.loadMainTheme()
 
 		err := speaker.Init(format.SampleRate, format.SampleRate.N(time.Second/10))
 		if err != nil {
 			log.Fatal(err)
 		}
-		m.streamControl.Streamer = m.mainTheamStreamer
+		m.streamControl.Streamer = m.mainThemeStreamer
 		m.playMainTheme()
 	}()
 
@@ -60,11 +60,11 @@ func (m *musicStreamers) Start() {
 	log.Print("Music loaded")
 }
 
-func (m *musicStreamers) loadMainTheam() beep.Format {
+func (m *musicStreamers) loadMainTheme() beep.Format {
 	var format beep.Format
-	m.mainTheamStreamer, format = getStream(musicMTfileName)
+	m.mainThemeStreamer, format = getStream(musicThemeFileName)
 	m.backgroundMusic = beep.NewBuffer(format)
-	m.backgroundMusic.Append(m.mainTheamStreamer)
+	m.backgroundMusic.Append(m.mainThemeStreamer)
 	m.streamControl.Paused = false
 	return format
 }
@@ -73,27 +73,27 @@ func (m *musicStreamers) playMainTheme() {
 
 	log.Print("Starting music")
 	var streamer = m.backgroundMusic.Streamer(0, m.backgroundMusic.Len())
-	loopedaudio := beep.Loop(5, streamer)
-	go speaker.Play(beep.Seq(loopedaudio))
+	LoopAudio := beep.Loop(5, streamer)
+	go speaker.Play(beep.Seq(LoopAudio))
 
 	log.Print("Music finished")
 
-	MusicLoaded <- 1
+	GameMusicLoader <- 1
 
 }
 
-func getfilename(fileName string) string {
+func getFileName(fileName string) string {
 	return "assets/" + fileName
 }
 
 func getStream(filename string) (beep.StreamCloser, beep.Format) {
 
-	absfilepath := getfilename(filename)
+	absFilePath := getFileName(filename)
 	var newStreamer beep.StreamCloser
 	var format beep.Format
 	var err error
 
-	byteSound, err := assetsManager.Asset(absfilepath)
+	byteSound, err := assetsManager.Asset(absFilePath)
 	if err != nil {
 		log.Fatal("Music file  ", err)
 	}
@@ -106,7 +106,7 @@ func getStream(filename string) (beep.StreamCloser, beep.Format) {
 	}
 
 	if err != nil {
-		log.Fatal("Decorer error on file ", absfilepath, " ", err)
+		log.Fatal("Decorer error on file ", absFilePath, " ", err)
 	}
 	return newStreamer, format
 }

@@ -31,8 +31,8 @@ func (m *musicStreamers) PlayEffect(effectType SoundEffect) {
 		m.streamControl.Paused = true
 		speaker.Unlock()
 		//log.Print("Creating new stream entry")
-		loopedaudio := beep.Loop(1, es.Streamer(0, es.Len()))
-		speaker.Play(beep.Seq(loopedaudio)) //effect exists -> play
+		LoopAudio := beep.Loop(1, es.Streamer(0, es.Len()))
+		speaker.Play(beep.Seq(LoopAudio)) //effect exists -> play
 		//log.Print("finished playing effect ")
 		speaker.Lock()
 		m.streamControl.Paused = false

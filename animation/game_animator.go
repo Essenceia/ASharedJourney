@@ -56,7 +56,7 @@ func (anim *Animator) muxChannel() *mechanics.Motion {
 //play main animation loop
 func (anim *Animator) Play() {
 	for play := true; play; play = shared.Continue() {
-		time.Sleep(shared.FrameRefreshDelay_ms * time.Millisecond)
+		time.Sleep(shared.FrameRefreshDelayMs * time.Millisecond)
 		motion := anim.muxChannel()
 		anim.animate(motion)
 	}

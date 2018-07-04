@@ -19,11 +19,11 @@ import (
 )
 
 //level image names
-const MainMenuImage string = "menu.png"
-const WinLevelMenuImage string = "win.png"
-const FinishedGameImage string = "end.png"
-const DrownedGameImage string = "oops.png"
-const RulesMenuImage string = "splashScreen.png"
+const MainMenuImage = "menu.png"
+const WinLevelMenuImage = "win.png"
+const FinishedGameImage = "end.png"
+const DrownedGameImage = "oops.png"
+const RulesMenuImage = "splashScreen.png"
 
 //draw menu to screen while player while player hasn't pressed enter
 func Menu(pictureName string, menuText string, positionText pixel.Vec, blocking bool, exitSoundEffect music.SoundEffect) {

@@ -1,5 +1,6 @@
 package tiles
 
+//noinspection ALL
 import (
 	"bytes"
 	"errors"
@@ -25,17 +26,17 @@ import (
 
 // Level names
 const (
-	bonhommeMap          string = "bonhomme"
-	splashScreen         string = "orgyIsland"
-	veryEasyLevel        string = "veryEasy"
-	mazeLevel            string = "maze"
-	theLongCorridorLevel string = "theLongCorridor"
-	amazeingLevel        string = "amazeing"
-	forestLevel          string = "forest"
-	myLittlePonyLevel    string = "myLittlePony"
-	theLittlePigLevel    string = "theLittlePig"
-	theStruggleLevel     string = "theStruggle"
-	inTheHoleTileID      int    = 61
+	bonhommeMap          = "bonhomme"
+	orgyIsIsland         = "orgyIsland"
+	veryEasyLevel        = "veryEasy"
+	mazeLevel            = "maze"
+	theLongCorridorLevel = "theLongCorridor"
+	amazeingLevel        = "amazeing"
+	forestLevel          = "forest"
+	myLittlePonyLevel    = "myLittlePony"
+	theLittlePigLevel    = "theLittlePig"
+	theStruggleLevel     = "theStruggle"
+	inTheHoleTileID      = 61
 )
 
 // CurrentLevel played
@@ -88,6 +89,7 @@ type SpriteWithPosition struct {
 // loadMap load the map
 func loadMap() (pixel.Picture, error) {
 
+	//noinspection GoUnresolvedReference
 	byteImage, err := assetsManager.Asset("assets/" + tilesPath)
 	if err != nil {
 		return nil, err

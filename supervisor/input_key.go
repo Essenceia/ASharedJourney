@@ -5,7 +5,7 @@ import (
 	"github.com/gandrin/ASharedJourney/shared"
 )
 
-//transition Direction in x , y coord
+//transition Direction in x , y coordinates
 type Direction struct {
 	X int
 	Y int
@@ -14,7 +14,7 @@ type Direction struct {
 //get the key values that was pressed
 //old directions
 var prevKeyPressed pixelgl.Button
-var interty int
+var keyAlreadyPressed int
 
 func key() Direction {
 	var pressed pixelgl.Button
@@ -53,15 +53,15 @@ end:
 	//check if key repressed
 	if pressed == prevKeyPressed {
 		//time penalty
-		if interty == 5 {
-			interty = 0
+		if keyAlreadyPressed == 5 {
+			keyAlreadyPressed = 0
 			return newDir
 		} else {
 			newDir = Direction{0, 0}
 		}
-		interty += 1
+		keyAlreadyPressed += 1
 	} else {
-		interty = 0
+		keyAlreadyPressed = 0
 	}
 	prevKeyPressed = pressed
 	return newDir
